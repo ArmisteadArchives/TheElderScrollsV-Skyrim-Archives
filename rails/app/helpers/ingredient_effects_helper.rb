@@ -1,0 +1,2 @@
+module IngredientEffectsHelper
+end
