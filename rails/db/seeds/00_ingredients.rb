@@ -1,35 +1,58 @@
 def addIngredient(n,w,v,e1n,e2n,e3n,e4n,s)
-  ih = {}
-  oh = {}
-  oh[:name] = n
-  oh[:weight] = w
-  oh[:value] = v
-  e1r = IngredientEffect.where(name: e1n).first
-  if e1r.nil?
-    ih[:effect1] = IngredientEffect.create(name: e1n)
+  ot = Item.where(name: n)
+  if ot.nil?
+    o = Item.create
+    i = Ingredient.create
   else
-    ih[:effect1] = e1r
+    o = ot
+    if o.specification.nil?
+      i = Ingredient.create
+      o.specification = i
+    else
+      i = Ingredient.find(o.specification)
+    end
   end
-  e2r = IngredientEffect.where(name: e2n).first
-  if e2r.nil?
-    ih[:effect2] = IngredientEffect.create(name: e2n)
-  else
-    ih[:effect2] = e2r
+  if o.name.nil?
+    o.name = n
   end
-  e3r = IngredientEffect.where(name: e3n).first
-  if e3r.nil?
-    ih[:effect3] = IngredientEffect.create(name: e3n)
-  else
-    ih[:effect3] = e3r
+  if o.weight.nil?
+    o.weight = w
   end
-  e4r = IngredientEffect.where(name: e4n).first
-  if e4r.nil?
-    ih[:effect4] = IngredientEffect.create(name: e4n)
-  else
-    ih[:effect4] = e1r
+  if o.value.nil?
+    o.value = v
   end
-  Item.create(oh)
-  Ingredient.create(ih)
+  if i.effect1.nil?
+    e1r = IngredientEffect.where(name: e1n).first
+    if e1r.nil?
+      i.effect1 = IngredientEffect.create(name: e1n)
+    else
+      i.effect1 = e1r
+    end
+  end
+  if i.effect2.nil?
+    e2r = IngredientEffect.where(name: e2n).first
+    if e2r.nil?
+      i.effect2 = IngredientEffect.create(name: e2n)
+    else
+      i.effect2 = e2r
+    end
+  end
+  if i.effect3.nil?
+    e3r = IngredientEffect.where(name: e3n).first
+    if e3r.nil?
+      i.effect3 = IngredientEffect.create(name: e3n)
+    else
+      i.effect3 = e3r
+    end
+  end
+  if i.effect4.nil?
+    e4r = IngredientEffect.where(name: e4n).first
+    if e4r.nil?
+      i.effect4 = IngredientEffect.create(name: e4n)
+    else
+      i.effect4 = e1r
+    end
+  end
 end
 
 addIngredient("Abecean Longfin",0.5,15,"Weakness to Frost","Fortify Sneak","Weakness to Poison","Fortify Restoration","Flowing water, lakes, barrel of fish ")
