@@ -12,6 +12,8 @@
 /db/*.sqlite3-journal
 
 # Ignore all logfiles and tempfiles.
-/log/*
+rails/log/*
 !/log/.keep
-/tmp
+rails/tmp
+
+**~
